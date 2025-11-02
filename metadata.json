@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Simple Agent",
+  "description": "A simple and elegant web-based chat interface to interact with a Gemini-powered conversational agent. It maintains conversation history and provides a seamless user experience.",
+  "requestFramePermissions": []
+}
