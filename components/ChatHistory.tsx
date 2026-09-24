@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { Message } from '../types';
-import ChatMessage from './ChatMessage';
+import React, { useEffect, useRef } from "react";
+import { Message } from "../types";
+import ChatMessage from "./ChatMessage";
 
 interface ChatHistoryProps {
   messages: Message[];
@@ -11,23 +11,22 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, isLoading }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    const node = scrollRef.current;
+    if (node) node.scrollTop = node.scrollHeight;
   }, [messages]);
 
   return (
-    <div ref={scrollRef} className="max-w-3xl mx-auto w-full h-full flex flex-col space-y-4 pr-2 overflow-y-auto">
+    <div ref={scrollRef} className="max-w-3xl mx-auto w-full h-full flex flex-col gap-4 overflow-y-auto pr-1">
       {messages.map((msg, index) => (
-        <ChatMessage 
-          key={index} 
-          message={msg} 
+        <ChatMessage
+          key={msg.id}
+          message={msg}
           isLoading={isLoading}
-          isLastMessage={index === messages.length - 1} 
+          isLastMessage={index === messages.length - 1}
         />
       ))}
     </div>
   );
 };
 
-export default ChatHistory;
+export default React.memo(ChatHistory);
