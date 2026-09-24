@@ -1,20 +1,63 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Kshitij Gemini Agent
 
-# Run and deploy your AI Studio app
+Google Gen AI track submission for Kshitij, IIT Kharagpur.
 
-This contains everything you need to run your app locally.
+Author: Parth Pariwandh, Jadavpur University.
 
-View your app in AI Studio: https://ai.studio/apps/drive/12XuyoA3wdhhc1aoYTvPQi7qxo-wdxpDl
+A streaming Gemini chat client with conversation memory, a small typed React surface, and a Vite build that reads the key from the environment instead of hardcoding it.
 
-## Run Locally
+## Stack
 
-**Prerequisites:**  Node.js
+| Layer | Choice |
+| :--- | :--- |
+| UI | React 19 + TypeScript |
+| Bundler | Vite 6 |
+| Model | Gemini 2.5 Flash via `@google/genai` |
+| Styling | Tailwind (CDN in `index.html`) |
 
+## Setup
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Install Node.js 20 or newer.
+2. Copy `.env.example` to `.env.local` and set `GEMINI_API_KEY`.
+3. Install and run:
+
+```bash
+npm install
+npm run dev
+```
+
+The app listens on `http://localhost:3000`.
+
+```bash
+npm run build
+npm run preview
+```
+
+## Layout
+
+```
+.
+├── App.tsx
+├── services/gemini.ts
+├── hooks/useChatSession.ts
+├── components/
+├── types.ts
+├── index.html
+└── vite.config.ts
+```
+
+## Behaviour
+
+The session is created once and reused, so Gemini keeps turn history.
+
+Replies stream token by token into the last model bubble.
+
+Transcripts persist in `localStorage` under `kshitij-gemini-session`.
+
+Clear chat resets the UI and starts a fresh Gemini chat object.
+
+The API key stays in `.env.local`. Vite injects it at build time. The key is never committed.
+
+## Event note
+
+This repository is the Kshitij / Google Gen AI app. The Amazon ML Challenge 2026 entity resolution work lives in a separate repository: `Xminati-Amazon-ML-Challenge-2026`.
